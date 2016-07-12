@@ -8,6 +8,7 @@ rvm:
 env:
   - RUBY_PLATFORM="x86_64-linux"
   - RUBY_PLATFORM="x86_64-darwin11.3.0"
+  - CODECLIMATE_REPO_TOKEN=91712672ab3a13c6201c11ea34ac37697a7758868a3b8fd0eddf9c03bde782af
 before_install:
 matrix:
   allow_failures:
