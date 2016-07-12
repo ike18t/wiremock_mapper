@@ -11,8 +11,8 @@ Gem::Specification.new do |spec|
 
   spec.homepage         = 'http://github.com/ike18t/wiremock_mapper'
   spec.license          = 'MIT'
-  spec.summary          = 'WireMock Mapper'
-  spec.description      = 'WireMock Mapper'
+  spec.summary          = 'Ruby DSL for setting up WireMock mappings'
+  spec.description      = spec.summary
 
   spec.files            = `git ls-files`.split($/)
   spec.test_files       = spec.files.grep(%r{^(test|spec|features)/})
