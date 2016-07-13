@@ -13,6 +13,11 @@ module WireMockMapper
       self
     end
 
+    def with_basic_auth username, password
+      @options['basicAuth'] = { 'username' => username, 'password' => password }
+      self
+    end
+
     def with_body
       @options['bodyPatterns'] ||= []
       match_builder = MatchBuilder.new(self)

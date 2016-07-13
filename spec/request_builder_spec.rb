@@ -11,6 +11,14 @@ describe WireMockMapper::RequestBuilder do
     end
   end
 
+  describe 'with_basic_auth' do
+    it 'adds basic auth' do
+      builder = WireMockMapper::RequestBuilder.new
+      builder.with_basic_auth('ike', '123456')
+      expect(builder.to_hash['basicAuth']).to eq({ 'username' => 'ike', 'password' => '123456' })
+    end
+  end
+
   describe 'with_body' do
     it 'returns a MatchBuilder' do
       builder = WireMockMapper::RequestBuilder.new
