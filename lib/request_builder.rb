@@ -1,4 +1,5 @@
 require_relative 'match_builder'
+require_relative 'url_match_builder'
 
 module WireMockMapper
   class RequestBuilder
@@ -7,13 +8,15 @@ module WireMockMapper
       @options['headers'] = configuration.request_headers if configuration
     end
 
-    def posts_to_path(url)
-      @options['method'] = 'POST'
-      @options['urlPath'] = url
-      self
+    HttpVerbs = %w(ANY DELETE GET HEAD OPTIONS POST PUT TRACE).freeze
+    HttpVerbs.each do |verb|
+      define_method("receives_#{verb.downcase}") do
+        @options['method'] = verb
+        self
+      end
     end
 
-    def with_basic_auth username, password
+    def with_basic_auth(username, password)
       @options['basicAuth'] = { 'username' => username, 'password' => password }
       self
     end
@@ -40,12 +43,21 @@ module WireMockMapper
       @options['queryParameters'][key] = MatchBuilder.new(self)
     end
 
+    def with_url
+      @url_match = UrlMatchBuilder.new(self)
+    end
+
+    def with_url_path
+      @url_match = UrlMatchBuilder.new(self, true)
+    end
+
     def to_hash(*)
-      @options
+      options_with_url_match = @options.merge(@url_match.to_hash) if @url_match
+      options_with_url_match || @options
     end
 
     def to_json(*)
-      @options.to_json
+      to_hash.to_json
     end
   end
 end

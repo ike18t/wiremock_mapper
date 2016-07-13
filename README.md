@@ -14,9 +14,10 @@ WireMockMapper::Configuration.set_wiremock_url('http://my_wiremock.com')
 WireMockMapper::Configuration.add_request_header('Some-Header').equal_to('some_value')
 
 WireMockMapper.create_mapping do |request, respond|
-	request.post_to_path('path/to/stub')
-			.with_header('Some-Other-Header').equal_to('some_other_value')
-			.with_body.equal_to(foo: bar)
+	request.receives_post
+           .with_url_path.equal_to('path/to/stub')
+           .with_header('Some-Other-Header').equal_to('some_other_value')
+           .with_body.equal_to(foo: bar)
 	respond.with_body('good job!')
 end
 ```

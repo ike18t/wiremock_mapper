@@ -14,7 +14,8 @@ describe WireMockMapper do
       stub_request(:post, "#{url}/__admin/mappings/new").with(body: expected_request_body)
 
       WireMockMapper.create_mapping(url) do |request, respond|
-        request.posts_to_path('/some/path')
+        request.receives_post
+               .with_url_path.equal_to('/some/path')
                .with_header('some_header').equal_to('some header value')
                .with_body.matching('some request body')
 
