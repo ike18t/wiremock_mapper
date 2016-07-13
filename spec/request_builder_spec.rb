@@ -108,10 +108,10 @@ describe WireMockMapper::RequestBuilder do
     end
   end
 
-  describe 'with_query_params' do
+  describe 'with_query_param' do
     it 'returns a MatchBuilder' do
       builder = WireMockMapper::RequestBuilder.new
-      expect(builder.with_query_params(:whatever)).to be_a(WireMockMapper::MatchBuilder)
+      expect(builder.with_query_param(:whatever)).to be_a(WireMockMapper::MatchBuilder)
     end
   end
 end

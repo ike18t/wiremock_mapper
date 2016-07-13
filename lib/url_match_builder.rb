@@ -7,12 +7,18 @@ module WireMockMapper
       @url_or_pattern = ''
     end
 
+    # Expect url to equal
+    # @param url [String] url to match against
+    # @return [RequestBuilder] calling request builder for chaining additional attributes
     def equal_to(url)
       @type = @path ? :urlPath : :url
       @url_or_pattern = url
       @request_builder
     end
 
+    # Expect url to match
+    # @param regex_string [String] regex for url to match against
+    # @return [RequestBuilder] calling request builder for chaining additional attributes
     def matching(regex_string)
       @type = @path ? :urlPathPattern : :urlPattern
       @url_or_pattern = regex_string

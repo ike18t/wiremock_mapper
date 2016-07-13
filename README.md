@@ -6,7 +6,7 @@
 
 ##WireMockMapper
 
-**Ruby DSL for setting up WireMock mappings**
+**Ruby DSL for setting up [WireMock](http://wiremock.org/) mappings**
 
 ####Usage Example
 ```ruby
