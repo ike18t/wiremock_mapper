@@ -5,42 +5,42 @@ module WireMockMapper
   class RequestBuilder
     def initialize(configuration = nil)
       @options = {}
-      @options['headers'] = configuration.request_headers if configuration
+      @options[:headers] = configuration.request_headers if configuration
     end
 
     HttpVerbs = %w(ANY DELETE GET HEAD OPTIONS POST PUT TRACE).freeze
     HttpVerbs.each do |verb|
       define_method("receives_#{verb.downcase}") do
-        @options['method'] = verb
+        @options[:method] = verb
         self
       end
     end
 
     def with_basic_auth(username, password)
-      @options['basicAuth'] = { 'username' => username, 'password' => password }
+      @options[:basicAuth] = { username: username, password: password }
       self
     end
 
     def with_body
-      @options['bodyPatterns'] ||= []
+      @options[:bodyPatterns] ||= []
       match_builder = MatchBuilder.new(self)
-      @options['bodyPatterns'] << match_builder
+      @options[:bodyPatterns] << match_builder
       match_builder
     end
 
     def with_cookie(key)
-      @options['cookies'] ||= {}
-      @options['cookies'][key] = MatchBuilder.new(self)
+      @options[:cookies] ||= {}
+      @options[:cookies][key] = MatchBuilder.new(self)
     end
 
     def with_header(key)
-      @options['headers'] ||= {}
-      @options['headers'][key] = MatchBuilder.new(self)
+      @options[:headers] ||= {}
+      @options[:headers][key] = MatchBuilder.new(self)
     end
 
     def with_query_params(key)
-      @options['queryParameters'] ||= {}
-      @options['queryParameters'][key] = MatchBuilder.new(self)
+      @options[:queryParameters] ||= {}
+      @options[:queryParameters][key] = MatchBuilder.new(self)
     end
 
     def with_url
