@@ -18,6 +18,12 @@ module WireMockMapper
       @request_builder
     end
 
+    def equal_to_json(json)
+      @type = :equalToJson
+      @value = json
+      @request_builder
+    end
+
     def equal_to_xml(xml)
       @type = :equalToXml
       @value = xml

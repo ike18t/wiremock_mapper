@@ -17,6 +17,14 @@ describe WireMockMapper::MatchBuilder do
     end
   end
 
+  describe 'equal_to_json' do
+    it 'returns a hash of { equalToJson => value }' do
+      builder = WireMockMapper::MatchBuilder.new(nil)
+      builder.equal_to_json 'foo'
+      expect(builder.to_hash).to eq(equalToJson: 'foo')
+    end
+  end
+
   describe 'equal_to_xml' do
     it 'returns a hash of { equalToXml => value }' do
       builder = WireMockMapper::MatchBuilder.new(nil)
