@@ -41,6 +41,14 @@ describe WireMockMapper::MatchBuilder do
     end
   end
 
+  describe 'matching_json_path' do
+    it 'returns a hash of { matchesJsonPath => value }' do
+      builder = WireMockMapper::MatchBuilder.new(nil)
+      builder.matching_json_path 'foo'
+      expect(builder.to_hash).to eq(matchesJsonPath: 'foo')
+    end
+  end
+
   describe 'matching_xpath' do
     it 'returns a hash of { matchesXPath => value }' do
       builder = WireMockMapper::MatchBuilder.new(nil)

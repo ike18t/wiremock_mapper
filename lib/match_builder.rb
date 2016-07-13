@@ -36,6 +36,12 @@ module WireMockMapper
       @request_builder
     end
 
+    def matching_json_path(json_path)
+      @type = :matchesJsonPath
+      @value = json_path
+      @request_builder
+    end
+
     def matching_xpath(xpath)
       @type = :matchesXPath
       @value = xpath
