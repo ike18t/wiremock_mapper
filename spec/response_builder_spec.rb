@@ -16,4 +16,13 @@ describe WireMockMapper::ResponseBuilder do
       expect(result['body']).to eq('{"some":"hash"}')
     end
   end
+
+  context 'with_status' do
+    it 'adds the status code' do
+      builder = WireMockMapper::ResponseBuilder.new
+      builder.with_status(400)
+      result = builder.to_hash
+      expect(result['status']).to eq(400)
+    end
+  end
 end

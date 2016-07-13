@@ -1,8 +1,9 @@
+require_relative 'match_builder'
+
 module WireMockMapper
   class RequestBuilder
     def initialize(configuration = nil)
       @options = {}
-      @options['headers'] ||= {}
       @options['headers'] = configuration.request_headers if configuration
     end
 
@@ -12,16 +13,26 @@ module WireMockMapper
       self
     end
 
-    def with_header(key, value)
-      @options['headers'][key] = { equalTo: value }
-      self
+    def with_body
+      @options['bodyPatterns'] ||= []
+      match_builder = MatchBuilder.new(self)
+      @options['bodyPatterns'] << match_builder
+      match_builder
     end
 
-    def with_body(value)
-      @options['bodyPatterns'] ||= []
-      value = value.to_json unless value.is_a? String
-      @options['bodyPatterns'] << { matches: value }
-      self
+    def with_cookie(key)
+      @options['cookies'] ||= {}
+      @options['cookies'][key] = MatchBuilder.new(self)
+    end
+
+    def with_header(key)
+      @options['headers'] ||= {}
+      @options['headers'][key] = MatchBuilder.new(self)
+    end
+
+    def with_query_params(key)
+      @options['queryParameters'] ||= {}
+      @options['queryParameters'][key] = MatchBuilder.new(self)
     end
 
     def to_hash(*)

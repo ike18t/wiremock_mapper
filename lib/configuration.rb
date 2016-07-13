@@ -6,8 +6,8 @@ module WireMockMapper
     class << self
       attr_reader :request_headers, :wiremock_url
 
-      def add_request_header(key, value)
-        @request_headers[key] = value
+      def add_request_header(key)
+        @request_headers[key] = MatchBuilder.new(self)
       end
 
       def set_wiremock_url(url)

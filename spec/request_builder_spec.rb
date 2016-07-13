@@ -11,28 +11,37 @@ describe WireMockMapper::RequestBuilder do
     end
   end
 
-  context 'with_header' do
-    it 'adds the header' do
+  describe 'with_body' do
+    it 'returns a MatchBuilder' do
       builder = WireMockMapper::RequestBuilder.new
-      builder.with_header('some', 'header')
-      result = builder.to_hash
-      expect(result['headers']).to eq('some' => { equalTo: 'header' })
+      expect(builder.with_body).to be_a(WireMockMapper::MatchBuilder)
+    end
+
+    it 'adds the matcher to bodyPatterns' do
+      builder = WireMockMapper::RequestBuilder.new
+      matcher = builder.with_body
+      expect(builder.to_hash).to eq('bodyPatterns' => [matcher])
     end
   end
 
-  context 'with_body' do
-    it 'adds the body' do
+  describe 'with_cookie' do
+    it 'returns a MatchBuilder' do
       builder = WireMockMapper::RequestBuilder.new
-      builder.with_body('some body')
-      result = builder.to_hash
-      expect(result['bodyPatterns']).to eq([{ matches: 'some body' }])
+      expect(builder.with_cookie('whatever')).to be_a(WireMockMapper::MatchBuilder)
     end
+  end
 
-    it 'converts value to_json if it is not a string' do
+  describe 'with_header' do
+    it 'returns a MatchBuilder' do
       builder = WireMockMapper::RequestBuilder.new
-      builder.with_body(some: 'hash')
-      result = builder.to_hash
-      expect(result['bodyPatterns']).to eq([{ matches: '{"some":"hash"}' }])
+      expect(builder.with_header('whatever')).to be_a(WireMockMapper::MatchBuilder)
+    end
+  end
+
+  describe 'with_query_params' do
+    it 'returns a MatchBuilder' do
+      builder = WireMockMapper::RequestBuilder.new
+      expect(builder.with_query_params('whatever')).to be_a(WireMockMapper::MatchBuilder)
     end
   end
 end

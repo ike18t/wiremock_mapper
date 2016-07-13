@@ -10,6 +10,11 @@ module WireMockMapper
       self
     end
 
+    def with_status(status_code)
+      @options['status'] = status_code
+      self
+    end
+
     def to_hash(*)
       @options
     end

@@ -2,9 +2,9 @@ require 'spec_helper'
 
 describe WireMockMapper::Configuration do
   context 'request_header' do
-    it 'adds the request header' do
-      WireMockMapper::Configuration.add_request_header('some', 'header')
-      expect(WireMockMapper::Configuration.request_headers).to eq('some' => 'header')
+    it 'returns a MatchBuilder' do
+      WireMockMapper::Configuration.add_request_header('some_header')
+      expect(WireMockMapper::Configuration.request_headers['some_header']).to be_a(WireMockMapper::MatchBuilder)
     end
   end
 

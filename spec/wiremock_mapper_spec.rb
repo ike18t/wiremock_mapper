@@ -15,8 +15,8 @@ describe WireMockMapper do
 
       WireMockMapper.create_mapping(url) do |request, respond|
         request.posts_to_path('/some/path')
-               .with_header('some_header', 'some header value')
-               .with_body('some request body')
+               .with_header('some_header').equal_to('some header value')
+               .with_body.matching('some request body')
 
         respond.with_body('some response body')
       end
