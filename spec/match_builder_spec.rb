@@ -1,6 +1,14 @@
 require 'spec_helper'
 
 describe WireMockMapper::MatchBuilder do
+  describe 'absent' do
+    it 'returns a hash of { absent => true }' do
+      builder = WireMockMapper::MatchBuilder.new(nil)
+      builder.absent
+      expect(builder.to_hash).to eq(absent: true)
+    end
+  end
+
   describe 'containing' do
     it 'returns a hash of { contains => value }' do
       builder = WireMockMapper::MatchBuilder.new(nil)
@@ -22,6 +30,18 @@ describe WireMockMapper::MatchBuilder do
       builder = WireMockMapper::MatchBuilder.new(nil)
       builder.equal_to_json 'foo'
       expect(builder.to_hash).to eq(equalToJson: 'foo')
+    end
+
+    it 'returns a hash of { equalToJson => value, ignoreArrayOrder => true }' do
+      builder = WireMockMapper::MatchBuilder.new(nil)
+      builder.equal_to_json 'foo', true
+      expect(builder.to_hash).to eq(equalToJson: 'foo', ignoreArrayOrder: true)
+    end
+
+    it 'returns a hash of { equalToJson => value, ignoreExtraElements => true }' do
+      builder = WireMockMapper::MatchBuilder.new(nil)
+      builder.equal_to_json 'foo', false, true
+      expect(builder.to_hash).to eq(equalToJson: 'foo', ignoreExtraElements: true)
     end
   end
 

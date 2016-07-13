@@ -4,6 +4,13 @@ module WireMockMapper
       @request_builder = request_builder
       @type = ''
       @value = ''
+      @options = {}
+    end
+
+    def absent
+      @type = :absent
+      @value = true
+      @request_builder
     end
 
     def containing(value)
@@ -18,9 +25,13 @@ module WireMockMapper
       @request_builder
     end
 
-    def equal_to_json(json)
+    def equal_to_json(json, ignore_array_order = false, ignore_extra_elements = false)
       @type = :equalToJson
       @value = json
+
+      @options[:ignoreArrayOrder] = true if ignore_array_order
+      @options[:ignoreExtraElements] = true if ignore_extra_elements
+
       @request_builder
     end
 
@@ -55,7 +66,7 @@ module WireMockMapper
     end
 
     def to_hash(*)
-      { @type => @value }
+      { @type => @value }.merge(@options)
     end
 
     def to_json(*)
