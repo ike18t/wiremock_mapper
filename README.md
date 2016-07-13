@@ -8,7 +8,7 @@
 
 **Ruby DSL for setting up WireMock mappings**
 
-####Usage Example####
+####Usage Example
 ```ruby
 WireMockMapper::Configuration.set_wiremock_url('http://my_wiremock.com')
 WireMockMapper::Configuration.add_header('Some-Header', 'some_value')
@@ -20,3 +20,5 @@ WireMockMapper.create_mapping do |request, respond|
 	respond.with_body('good job!')
 end
 ```
+
+###### Special thanks to [Manheim](https://www.manheim.com)'s [Seller Tools](https://sites.google.com/site/sellertoolsteam/home) team for allowing me to work on this during the team Hackathon.
