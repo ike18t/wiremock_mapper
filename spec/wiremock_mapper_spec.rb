@@ -23,7 +23,7 @@ describe WireMockMapper do
       end
     end
 
-    # rubocop:disable Style/LineLength
+    # rubocop:disable Metrics/LineLength
     it 'posts the correct json with configured global mappings to the wiremock url' do
       url = 'http://nowhere.com'
       expected_request_body = { request: { 'method' => 'POST',
@@ -48,6 +48,6 @@ describe WireMockMapper do
         respond.with_body('some response body')
       end
     end
-    # rubocop:enable Style/LineLength
+    # rubocop:enable Metrics/LineLength
   end
 end
