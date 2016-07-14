@@ -3,9 +3,8 @@ require_relative 'url_match_builder'
 
 module WireMockMapper
   class RequestBuilder
-    def initialize(configuration = nil)
+    def initialize
       @options = {}
-      @options[:headers] = configuration.request_headers if configuration
     end
 
     HTTP_VERBS = %w(ANY DELETE GET HEAD OPTIONS POST PUT TRACE).freeze

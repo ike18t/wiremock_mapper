@@ -7,8 +7,8 @@ module WireMockMapper
   VERSION = '0.3.0'.freeze
 
   def self.create_mapping(url = Configuration.wiremock_url)
-    request_builder = RequestBuilder.new
-    response_builder = ResponseBuilder.new
+    request_builder = Configuration.request_builder.clone
+    response_builder = Configuration.response_builder.clone
 
     yield request_builder, response_builder
 

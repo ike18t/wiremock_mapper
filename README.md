@@ -11,12 +11,18 @@
 ####Usage Example
 ```ruby
 WireMockMapper::Configuration.set_wiremock_url('http://my_wiremock.com')
-WireMockMapper::Configuration.add_request_header('Some-Header').equal_to('some_value')
+
+WireMockMapper::Configuration.create_global_mapping do |request, respond|
+  request.with_header('Some-Header').equal_to('some_value')
+         .with_cookie('Some-Cookie').equal_to('some_cookie_value')
+  respond.with_status(200)
+end
 
 WireMockMapper.create_mapping do |request, respond|
 	request.receives_post
            .with_url_path.equal_to('path/to/stub')
            .with_header('Some-Other-Header').equal_to('some_other_value')
+           .with_cookie('Some-Other-Cookie').equal_to('some_other_cookie_value')
            .with_body.equal_to(foo: bar)
 	respond.with_body('good job!')
 end

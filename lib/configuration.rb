@@ -1,11 +1,20 @@
+require_relative 'request_builder'
+require_relative 'response_builder'
+
 module WireMockMapper
   class Configuration
-    @request_headers = {}
     @wiremock_url = ''
 
-    class << self
-      attr_reader :request_headers, :wiremock_url
+    @request_builder = RequestBuilder.new
+    @response_builder = ResponseBuilder.new
 
+    class << self
+      attr_reader :request_builder, :response_builder, :wiremock_url
+
+      # Add mappings to include for all future mappings
+      def create_global_mapping
+        yield @request_builder, @response_builder
+      end
 
       # Add a request header for all future requests
       # @param key [String] header key

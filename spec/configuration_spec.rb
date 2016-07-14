@@ -1,14 +1,23 @@
 require 'spec_helper'
 
 describe WireMockMapper::Configuration do
-  context 'request_header' do
-    it 'returns a MatchBuilder' do
-      WireMockMapper::Configuration.add_request_header('some_header')
-      expect(WireMockMapper::Configuration.request_headers['some_header']).to be_a(WireMockMapper::MatchBuilder)
+  describe 'create_global_mapping' do
+    it 'configures the request builder attribute' do
+      expect(WireMockMapper::Configuration.request_builder.to_hash).to eq({})
+
+      WireMockMapper::Configuration.create_global_mapping do |request, _response|
+        request.with_header('foo').equal_to('bar')
+      end
+
+      header_key_value = WireMockMapper::Configuration.request_builder.to_hash[:headers]['foo']
+      expect(header_key_value).to be_a(WireMockMapper::MatchBuilder)
+
+      # BOOOOOO!
+      WireMockMapper::Configuration.instance_variable_set(:@request_builder, WireMockMapper::RequestBuilder.new)
     end
   end
 
-  context 'wiremock_url' do
+  describe 'wiremock_url' do
     it 'sets the wiremock url' do
       WireMockMapper::Configuration.set_wiremock_url('http://whereever.com')
       expect(WireMockMapper::Configuration.wiremock_url).to eq('http://whereever.com')
