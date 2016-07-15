@@ -8,6 +8,45 @@ module WireMockMapper
         @options = {}
       end
 
+      ##
+      # @!method receives_any
+      # Sets the request HTTP method to ANY
+      # @return [RequestBuilder] request builder for chaining
+
+      ##
+      # @!method receives_delete
+      # Sets the request HTTP method to DELETE
+      # @return [RequestBuilder] request builder for chaining
+
+      ##
+      # @!method receives_get
+      # Sets the request HTTP method to GET
+      # @return [RequestBuilder] request builder for chaining
+
+      ##
+      # @!method receives_head
+      # Sets the request HTTP method to HEAD
+      # @return [RequestBuilder] request builder for chaining
+
+      ##
+      # @!method receives_options
+      # Sets the request HTTP method to OPTIONS
+      # @return [RequestBuilder] request builder for chaining
+
+      ##
+      # @!method receives_post
+      # Sets the request HTTP method to POST
+      # @return [RequestBuilder] request builder for chaining
+
+      ##
+      # @!method receives_put
+      # Sets the request HTTP method to PUT
+      # @return [RequestBuilder] request builder for chaining
+
+      ##
+      # @!method receives_trace
+      # Sets the request HTTP method to TRACE
+      # @return [RequestBuilder] request builder for chaining
       HTTP_VERBS = %w(ANY DELETE GET HEAD OPTIONS POST PUT TRACE).freeze
       private_constant :HTTP_VERBS
 
