@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe WireMockMapper do
-  context 'control' do
+  describe 'create_mapping' do
     it 'posts the correct json to the wiremock url' do
       url = 'http://nowhere.com'
       expected_request_body = { request: { 'method' => 'POST',

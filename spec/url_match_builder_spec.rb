@@ -1,5 +1,4 @@
 require 'spec_helper'
-require_relative '../lib/url_match_builder'
 
 describe WireMockMapper::MatchBuilder do
   context 'initialized with path = true' do
