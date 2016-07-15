@@ -3,65 +3,65 @@ require 'spec_helper'
 describe WireMockMapper::Builders::RequestBuilder do
   let(:builder) { WireMockMapper::Builders::RequestBuilder.new }
 
-  describe 'receives_any' do
+  describe 'is_a_any' do
     it 'sets the http method and url path' do
-      builder.receives_any
+      builder.is_a_any
       result = builder.to_hash
       expect(result[:method]).to eq('ANY')
     end
   end
 
-  describe 'receives_delete' do
+  describe 'is_a_delete' do
     it 'sets the http method and url path' do
-      builder.receives_delete
+      builder.is_a_delete
       result = builder.to_hash
       expect(result[:method]).to eq('DELETE')
     end
   end
 
-  describe 'receives_get' do
+  describe 'is_a_get' do
     it 'sets the http method and url path' do
-      builder.receives_get
+      builder.is_a_get
       result = builder.to_hash
       expect(result[:method]).to eq('GET')
     end
   end
 
-  describe 'receives_head' do
+  describe 'is_a_head' do
     it 'sets the http method and url path' do
-      builder.receives_head
+      builder.is_a_head
       result = builder.to_hash
       expect(result[:method]).to eq('HEAD')
     end
   end
 
-  describe 'receives_options' do
+  describe 'is_a_options' do
     it 'sets the http method and url path' do
-      builder.receives_options
+      builder.is_a_options
       result = builder.to_hash
       expect(result[:method]).to eq('OPTIONS')
     end
   end
 
-  describe 'receives_put' do
+  describe 'is_a_put' do
     it 'sets the http method and url path' do
-      builder.receives_put
+      builder.is_a_put
       result = builder.to_hash
       expect(result[:method]).to eq('PUT')
     end
   end
 
-  describe 'receives_post' do
+  describe 'is_a_post' do
     it 'sets the http method and url path' do
-      builder.receives_post
+      builder.is_a_post
       result = builder.to_hash
       expect(result[:method]).to eq('POST')
     end
   end
 
-  describe 'receives_trace' do
+  describe 'is_a_trace' do
     it 'sets the http method and url path' do
-      builder.receives_trace
+      builder.is_a_trace
       result = builder.to_hash
       expect(result[:method]).to eq('TRACE')
     end

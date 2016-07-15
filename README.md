@@ -19,7 +19,7 @@ WireMockMapper::Configuration.create_global_mapping do |request, respond|
 end
 
 WireMockMapper.create_mapping do |request, respond|
-	request.receives_post
+	request.is_a_post
            .with_url_path.equal_to('path/to/stub')
            .with_header('Some-Other-Header').equal_to('some_other_value')
            .with_cookie('Some-Other-Cookie').equal_to('some_other_cookie_value')
