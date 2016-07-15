@@ -1,9 +1,10 @@
 require 'spec_helper'
 
-describe WireMockMapper::MatchBuilder do
+describe WireMockMapper::Builders::MatchBuilder do
+  let(:builder) { WireMockMapper::Builders::MatchBuilder.new(nil) }
+
   describe 'absent' do
     it 'returns a hash of { absent => true }' do
-      builder = WireMockMapper::MatchBuilder.new(nil)
       builder.absent
       expect(builder.to_hash).to eq(absent: true)
     end
@@ -11,7 +12,6 @@ describe WireMockMapper::MatchBuilder do
 
   describe 'containing' do
     it 'returns a hash of { contains => value }' do
-      builder = WireMockMapper::MatchBuilder.new(nil)
       builder.containing 'foo'
       expect(builder.to_hash).to eq(contains: 'foo')
     end
@@ -19,7 +19,6 @@ describe WireMockMapper::MatchBuilder do
 
   describe 'equal_to' do
     it 'returns a hash of { equalTo => value }' do
-      builder = WireMockMapper::MatchBuilder.new(nil)
       builder.equal_to 'foo'
       expect(builder.to_hash).to eq(equalTo: 'foo')
     end
@@ -27,19 +26,16 @@ describe WireMockMapper::MatchBuilder do
 
   describe 'equal_to_json' do
     it 'returns a hash of { equalToJson => value }' do
-      builder = WireMockMapper::MatchBuilder.new(nil)
       builder.equal_to_json 'foo'
       expect(builder.to_hash).to eq(equalToJson: 'foo')
     end
 
     it 'returns a hash of { equalToJson => value, ignoreArrayOrder => true }' do
-      builder = WireMockMapper::MatchBuilder.new(nil)
       builder.equal_to_json 'foo', true
       expect(builder.to_hash).to eq(equalToJson: 'foo', ignoreArrayOrder: true)
     end
 
     it 'returns a hash of { equalToJson => value, ignoreExtraElements => true }' do
-      builder = WireMockMapper::MatchBuilder.new(nil)
       builder.equal_to_json 'foo', false, true
       expect(builder.to_hash).to eq(equalToJson: 'foo', ignoreExtraElements: true)
     end
@@ -47,7 +43,6 @@ describe WireMockMapper::MatchBuilder do
 
   describe 'equal_to_xml' do
     it 'returns a hash of { equalToXml => value }' do
-      builder = WireMockMapper::MatchBuilder.new(nil)
       builder.equal_to_xml 'foo'
       expect(builder.to_hash).to eq(equalToXml: 'foo')
     end
@@ -55,7 +50,6 @@ describe WireMockMapper::MatchBuilder do
 
   describe 'matching' do
     it 'returns a hash of { matches => value }' do
-      builder = WireMockMapper::MatchBuilder.new(nil)
       builder.matching 'foo'
       expect(builder.to_hash).to eq(matches: 'foo')
     end
@@ -63,7 +57,6 @@ describe WireMockMapper::MatchBuilder do
 
   describe 'matching_json_path' do
     it 'returns a hash of { matchesJsonPath => value }' do
-      builder = WireMockMapper::MatchBuilder.new(nil)
       builder.matching_json_path 'foo'
       expect(builder.to_hash).to eq(matchesJsonPath: 'foo')
     end
@@ -71,7 +64,6 @@ describe WireMockMapper::MatchBuilder do
 
   describe 'matching_xpath' do
     it 'returns a hash of { matchesXPath => value }' do
-      builder = WireMockMapper::MatchBuilder.new(nil)
       builder.matching_xpath 'foo'
       expect(builder.to_hash).to eq(matchesXPath: 'foo')
     end
@@ -79,7 +71,6 @@ describe WireMockMapper::MatchBuilder do
 
   describe 'not_matching' do
     it 'returns a hash of { doesNotMatch => value }' do
-      builder = WireMockMapper::MatchBuilder.new(nil)
       builder.not_matching 'foo'
       expect(builder.to_hash).to eq(doesNotMatch: 'foo')
     end

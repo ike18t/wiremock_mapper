@@ -10,10 +10,11 @@ describe WireMockMapper::Configuration do
       end
 
       header_key_value = WireMockMapper::Configuration.request_builder.to_hash[:headers]['foo']
-      expect(header_key_value).to be_a(WireMockMapper::MatchBuilder)
+      expect(header_key_value).to be_a(WireMockMapper::Builders::MatchBuilder)
 
       # BOOOOOO!
-      WireMockMapper::Configuration.instance_variable_set(:@request_builder, WireMockMapper::RequestBuilder.new)
+      WireMockMapper::Configuration.instance_variable_set(:@request_builder,
+                                                          WireMockMapper::Builders::RequestBuilder.new)
     end
   end
 

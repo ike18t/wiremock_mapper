@@ -1,7 +1,5 @@
 require 'net/http'
 require_relative 'configuration'
-require_relative 'request_builder'
-require_relative 'response_builder'
 
 module WireMockMapper
   def self.create_mapping(url = Configuration.wiremock_url)

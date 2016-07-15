@@ -1,12 +1,12 @@
-require_relative 'request_builder'
-require_relative 'response_builder'
+require_relative 'builders/request_builder'
+require_relative 'builders/response_builder'
 
 module WireMockMapper
   class Configuration
     @wiremock_url = ''
 
-    @request_builder = RequestBuilder.new
-    @response_builder = ResponseBuilder.new
+    @request_builder = Builders::RequestBuilder.new
+    @response_builder = Builders::ResponseBuilder.new
 
     class << self
       attr_reader :request_builder, :response_builder, :wiremock_url

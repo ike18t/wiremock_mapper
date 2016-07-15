@@ -36,7 +36,7 @@ describe WireMockMapper do
                                 response: { 'body' => 'some response body' } }
       stub_request(:post, "#{url}/__admin/mappings/new").with(body: expected_request_body)
 
-      request_builder = WireMockMapper::RequestBuilder.new.with_header('some_global_header').equal_to('some global header value')
+      request_builder = WireMockMapper::Builders::RequestBuilder.new.with_header('some_global_header').equal_to('some global header value')
       expect(WireMockMapper::Configuration).to receive(:request_builder).and_return(request_builder)
 
       WireMockMapper.create_mapping(url) do |request, respond|

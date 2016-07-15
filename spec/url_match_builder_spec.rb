@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe WireMockMapper::MatchBuilder do
+describe WireMockMapper::Builders::MatchBuilder do
   context 'initialized with path = true' do
-    let(:builder) { WireMockMapper::UrlMatchBuilder.new(nil, true) }
+    let(:builder) { WireMockMapper::Builders::UrlMatchBuilder.new(nil, true) }
 
     describe 'equal_to' do
       it 'sets the return of to_hash to {urlPath: value}' do
@@ -20,7 +20,7 @@ describe WireMockMapper::MatchBuilder do
   end
 
   context 'initialized with path = false' do
-    let(:builder) { WireMockMapper::UrlMatchBuilder.new(nil) }
+    let(:builder) { WireMockMapper::Builders::UrlMatchBuilder.new(nil) }
 
     describe 'equal_to' do
       it 'sets the return of to_hash to {url: value}' do
