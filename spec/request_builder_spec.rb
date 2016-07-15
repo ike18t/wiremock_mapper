@@ -108,6 +108,28 @@ describe WireMockMapper::RequestBuilder do
     end
   end
 
+  describe 'with_url' do
+    it 'should return a UrlMatchBuilder' do
+      builder = WireMockMapper::RequestBuilder.new
+      expect(builder.with_url).to be_a(WireMockMapper::UrlMatchBuilder)
+    end
+  end
+
+  describe 'with_url_path' do
+    it 'should return a UrlMatchBuilder' do
+      builder = WireMockMapper::RequestBuilder.new
+      expect(builder.with_url_path).to be_a(WireMockMapper::UrlMatchBuilder)
+    end
+  end
+
+  describe 'to_hash' do
+    it 'should merge in url_match info' do
+      builder = WireMockMapper::RequestBuilder.new
+      builder.with_url.equal_to('foo')
+      expect(builder.to_hash).to eq(url: 'foo')
+    end
+  end
+
   describe 'with_query_param' do
     it 'returns a MatchBuilder' do
       builder = WireMockMapper::RequestBuilder.new

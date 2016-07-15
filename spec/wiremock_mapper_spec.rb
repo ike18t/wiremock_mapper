@@ -27,7 +27,7 @@ describe WireMockMapper do
     it 'posts the correct json with configured global mappings to the wiremock url' do
       url = 'http://nowhere.com'
       expected_request_body = { request: { 'method' => 'POST',
-                                           'urlPath' => '/some/path',
+                                           'url' => '/some/url',
                                            'headers' => { 'some_global_header' => { 'equalTo' => 'some global header value' },
                                                           'some_header' => { 'equalTo' => 'some header value' } },
                                            'bodyPatterns' => [
@@ -41,7 +41,7 @@ describe WireMockMapper do
 
       WireMockMapper.create_mapping(url) do |request, respond|
         request.receives_post
-               .with_url_path.equal_to('/some/path')
+               .with_url.equal_to('/some/url')
                .with_header('some_header').equal_to('some header value')
                .with_body.matching('some request body')
 
