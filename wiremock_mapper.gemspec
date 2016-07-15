@@ -1,5 +1,6 @@
 $LOAD_PATH.unshift(File.expand_path('../lib', __FILE__))
-require 'wiremock_mapper'
+
+require 'version'
 
 Gem::Specification.new do |spec|
   spec.name             = 'wiremock_mapper'
@@ -23,6 +24,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'codeclimate-test-reporter'
   spec.add_development_dependency 'pry'
   spec.add_development_dependency 'rake'
+  spec.add_development_dependency 'require_all'
   spec.add_development_dependency 'rspec'
   spec.add_development_dependency 'rubocop'
   spec.add_development_dependency 'webmock'

@@ -4,8 +4,6 @@ require_relative 'request_builder'
 require_relative 'response_builder'
 
 module WireMockMapper
-  VERSION = '0.4.0'.freeze
-
   def self.create_mapping(url = Configuration.wiremock_url)
     request_builder = deep_clone(Configuration.request_builder)
     response_builder = deep_clone(Configuration.response_builder)
