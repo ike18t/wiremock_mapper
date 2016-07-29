@@ -3,10 +3,14 @@
 [![Test Coverage](https://codeclimate.com/github/ike18t/wiremock_mapper/badges/coverage.svg)](https://codeclimate.com/github/ike18t/wiremock_mapper/coverage)
 [![Dependency Status](https://gemnasium.com/badges/github.com/ike18t/wiremock_mapper.svg)](https://gemnasium.com/github.com/ike18t/wiremock_mapper)
 [![Gem Version](https://badge.fury.io/rb/wiremock_mapper.svg)](https://badge.fury.io/rb/wiremock_mapper)
+[![Documentation](http://inch-ci.org/github/ike18t/wiremock_mapper.svg?branch=master)](http://inch-ci.org/github/ike18t/wiremock_mapper)
 
 ##WireMockMapper
 
 **Ruby DSL for setting up [WireMock](http://wiremock.org/) mappings**
+
+####Documentation
+Can be found at [RubyDoc.info](http://www.rubydoc.info/gems/wiremock_mapper)
 
 ####Usage Example
 ```ruby
@@ -14,17 +18,17 @@ WireMockMapper::Configuration.set_wiremock_url('http://my_wiremock.com')
 
 WireMockMapper::Configuration.create_global_mapping do |request, respond|
   request.with_header('Some-Header').equal_to('some_value')
-         .with_cookie('Some-Cookie').equal_to('some_cookie_value')
+         .with_cookie('Some-Cookie').not_matching('some_cookie_value')
   respond.with_status(200)
 end
 
 WireMockMapper.create_mapping do |request, respond|
-	request.is_a_post
-           .with_url_path.equal_to('path/to/stub')
-           .with_header('Some-Other-Header').equal_to('some_other_value')
-           .with_cookie('Some-Other-Cookie').equal_to('some_other_cookie_value')
-           .with_body.equal_to(foo: bar)
-	respond.with_body('good job!')
+  request.is_a_post
+         .with_url_path.equal_to('path/to/stub')
+         .with_header('Some-Other-Header').equal_to('some_other_value')
+         .with_cookie('Some-Other-Cookie').containing('some_other_cookie_value')
+         .with_body.equal_to(foo: bar)
+  respond.with_body('good job!')
 end
 ```
 
