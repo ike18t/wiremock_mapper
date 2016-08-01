@@ -34,6 +34,11 @@ describe WireMockMapper::Builders::MatchBuilder do
         builder.matching '/some/path'
         expect(builder.to_hash).to eq(urlPattern: '/some/path')
       end
+
+      it 'sets the return of to_hash to {urlPattern: value}' do
+        builder.matching(/\/some(\/path)?/)
+        expect(builder.to_hash).to eq(urlPattern: '\/some(\/path)?')
+      end
     end
   end
 end

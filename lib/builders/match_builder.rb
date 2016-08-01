@@ -58,12 +58,13 @@ module WireMockMapper
         @request_builder
       end
 
-      # Match if attribute value matches the regex_string
-      # @param regex_string [String] xml to match against
+      # Match if attribute value matches the regexp
+      # @param regexp [String, Regexp] regexp to match against
       # @return [RequestBuilder] calling request builder for chaining additional attributes
-      def matching(regex_string)
+      def matching(regexp)
+        regexp = Helpers.regexp_to_string regexp if regexp.is_a? Regexp
         @type = :matches
-        @value = regex_string
+        @value = regexp
         @request_builder
       end
 
@@ -86,11 +87,12 @@ module WireMockMapper
       end
 
       # Match if attribute value does not match
-      # @param regex_string [String] regex_string to match against
+      # @param regexp [Regexp, String] regexp to match against
       # @return [RequestBuilder] calling request builder for chaining additional attributes
-      def not_matching(regex_string)
+      def not_matching(regexp)
+        regexp = Helpers.regexp_to_string regexp if regexp.is_a? Regexp
         @type = :doesNotMatch
-        @value = regex_string
+        @value = regexp
         @request_builder
       end
 

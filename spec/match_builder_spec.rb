@@ -53,6 +53,11 @@ describe WireMockMapper::Builders::MatchBuilder do
       builder.matching 'foo'
       expect(builder.to_hash).to eq(matches: 'foo')
     end
+
+    it 'converts the regex to a string and returns a hash of { matches => value }' do
+      builder.matching(/foo(s)?/)
+      expect(builder.to_hash).to eq(matches: 'foo(s)?')
+    end
   end
 
   describe 'matching_json_path' do
@@ -73,6 +78,11 @@ describe WireMockMapper::Builders::MatchBuilder do
     it 'returns a hash of { doesNotMatch => value }' do
       builder.not_matching 'foo'
       expect(builder.to_hash).to eq(doesNotMatch: 'foo')
+    end
+
+    it 'converts the regex to a string and returns a hash of { doesNotMatch => value }' do
+      builder.matching(/foo(s)?/)
+      expect(builder.to_hash).to eq(matches: 'foo(s)?')
     end
   end
 end

@@ -18,11 +18,12 @@ module WireMockMapper
       end
 
       # Expect url to match
-      # @param regex_string [String] regex for url to match against
+      # @param regexp [Regexp, String] regex for url to match against
       # @return [RequestBuilder] calling request builder for chaining additional attributes
-      def matching(regex_string)
+      def matching(regexp)
+        regexp = Helpers.regexp_to_string regexp if regexp.is_a? Regexp
         @type = @path ? :urlPathPattern : :urlPattern
-        @url_or_pattern = regex_string
+        @url_or_pattern = regexp
         @request_builder
       end
 
