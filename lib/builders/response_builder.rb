@@ -14,6 +14,14 @@ module WireMockMapper
         self
       end
 
+      # Add a response delay
+      # @param milliseconds [String, Numeric] the delay duration in milliseconds
+      # @return [ResponseBuilder] response builder for chaining
+      def with_delay(milliseconds)
+        @options[:fixedDelayMilliseconds] = milliseconds
+        self
+      end
+
       # Add a response header
       # @param key [String] the key of the header
       # @param value [String] the value of the header

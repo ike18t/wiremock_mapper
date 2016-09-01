@@ -47,4 +47,12 @@ describe WireMockMapper::Builders::ResponseBuilder do
       expect(result[:statusMessage]).to eq('message')
     end
   end
+
+  describe 'with_delay' do
+    it 'adds the fixed delay milliseconds' do
+      builder.with_delay(1200)
+      result = builder.to_hash
+      expect(result[:fixedDelayMilliseconds]).to eq(1200)
+    end
+  end
 end
