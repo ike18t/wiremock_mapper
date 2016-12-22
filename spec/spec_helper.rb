@@ -2,7 +2,7 @@ require 'bundler/setup'
 require 'webmock/rspec'
 
 Bundler.require :development
-CodeClimate::TestReporter.start
+SimpleCov.start
 
 WebMock.disable_net_connect!(allow: 'codeclimate.com')
 

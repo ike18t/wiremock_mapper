@@ -26,5 +26,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'require_all'
   spec.add_development_dependency 'rspec'
   spec.add_development_dependency 'rubocop', '0.41.2'
-  spec.add_development_dependency 'webmock'
+  # public_suffix needed to be included and locked down due to webmock
+  spec.add_development_dependency 'public_suffix', '1.4.6'
+  spec.add_development_dependency 'webmock', '2.2.0'
 end
