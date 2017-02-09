@@ -48,6 +48,14 @@ module WireMockMapper
         self
       end
 
+      # Tell wiremock to use a transformer for the response
+      # @param transformer name [String]
+      # @return [ResponseBuilder] response builder for chaining
+      def with_transformer(transformer)
+        @options[:transformer] = transformer
+        self
+      end
+
       def to_hash(*)
         @options
       end

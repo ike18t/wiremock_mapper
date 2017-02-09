@@ -55,4 +55,12 @@ describe WireMockMapper::Builders::ResponseBuilder do
       expect(result[:fixedDelayMilliseconds]).to eq(1200)
     end
   end
+
+  describe 'with_transformer' do
+    it 'adds the transformer for wiremock to use' do
+      builder.with_transformer('optimus prime')
+      result = builder.to_hash
+      expect(result[:transformer]).to eq('optimus prime')
+    end
+  end
 end
