@@ -12,8 +12,8 @@ describe WireMockMapper do
                                            ] },
                                 response: { 'body' => 'some response body' } }
 
-      stub = stub_request(:post, "#{url}/__admin/mappings/new").with(body: expected_request_body)
-                                                               .to_return(body: { id: 'whatevs' }.to_json)
+      stub = stub_request(:post, "#{url}/__admin/mappings").with(body: expected_request_body)
+                                                           .to_return(body: { id: 'whatevs' }.to_json)
 
       WireMockMapper.create_mapping(url) do |request, respond|
         request.is_a_post
@@ -38,8 +38,8 @@ describe WireMockMapper do
                                            ] },
                                 response: { 'body' => 'some response body' } }
 
-      stub = stub_request(:post, "#{url}/__admin/mappings/new").with(body: expected_request_body)
-                                                               .to_return(body: { id: 'whatevs' }.to_json)
+      stub = stub_request(:post, "#{url}/__admin/mappings").with(body: expected_request_body)
+                                                           .to_return(body: { id: 'whatevs' }.to_json)
 
       WireMockMapper::Configuration.create_global_mapping do |request|
         request.with_header('some_global_header').equal_to('global value')
