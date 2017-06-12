@@ -10,38 +10,32 @@ module WireMockMapper
       yield request_builder, response_builder
 
       response = send_to_wiremock(url, request: request_builder, response: response_builder)
-      body = JSON.parse(response.body)
-      save_mapping_id(body['id'])
-      body
+      JSON.parse(response.body).fetch('id')
     end
 
-    def delete_mappings(url = Configuration.wiremock_url)
-      mapping_ids.each do |mapping_id|
-        delete_from_wiremock(url, mapping_id)
-      end
+    def delete_mapping(mapping_id, url = Configuration.wiremock_url)
+      delete_from_wiremock(url, mapping_id)
+    end
 
-      forget_saved_mappings
+    def clear_mappings(url = Configuration.wiremock_url)
+      clear_wiremock_mappings(url)
     end
 
     private
 
     WIREMOCK_MAPPINGS_PATH = '__admin/mappings'.freeze
     WIREMOCK_NEW_MAPPING_PATH = "#{WIREMOCK_MAPPINGS_PATH}/new".freeze
+    WIREMOCK_CLEAR_MAPPINGS_PATH = "#{WIREMOCK_MAPPINGS_PATH}/reset".freeze
 
     def deep_clone(object)
       Marshal.load(Marshal.dump(object))
     end
 
-    def save_mapping_id(mapping_id)
-      mapping_ids << mapping_id
-    end
-
-    def mapping_ids
-      @mapping_ids ||= []
-    end
-
-    def forget_saved_mappings
-      mapping_ids.clear
+    def clear_wiremock_mappings(url)
+      uri = URI([url, WIREMOCK_CLEAR_MAPPINGS_PATH].join('/'))
+      http = Net::HTTP.new(uri.host, uri.port)
+      request = Net::HTTP::Post.new(uri.path)
+      http.request(request)
     end
 
     def delete_from_wiremock(url, mapping_id)

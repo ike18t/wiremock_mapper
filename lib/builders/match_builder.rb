@@ -35,7 +35,7 @@ module WireMockMapper
       end
 
       # Match if attribute json is equal to the arg
-      # @param json [String] json to compare against
+      # @param json [String, Hash] json to compare against
       # @param ignore_array_order [true, false] flag to ignore the order of arrays
       # @param ignore_extra_elements [true, false] flag to ignore any extra elements
       # @return [RequestBuilder] calling request builder for chaining additional attributes
