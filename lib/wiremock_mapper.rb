@@ -10,7 +10,7 @@ module WireMockMapper
 
       yield request_builder, response_builder, scenario_builder
 
-      body = {request: request_builder, response: response_builder}.merge(scenario_builder)
+      body = { request: request_builder, response: response_builder }.merge(scenario_builder)
       response = send_to_wiremock(url, body)
 
       JSON.parse(response.body).fetch('id')
