@@ -47,7 +47,7 @@ module WireMockMapper
       # @!method is_a_trace
       # Sets the request HTTP method to TRACE
       # @return [RequestBuilder] request builder for chaining
-      HTTP_VERBS = %w(ANY DELETE GET HEAD OPTIONS POST PUT TRACE).freeze
+      HTTP_VERBS = %w[ANY DELETE GET HEAD OPTIONS POST PUT TRACE].freeze
       private_constant :HTTP_VERBS
 
       HTTP_VERBS.each do |verb|

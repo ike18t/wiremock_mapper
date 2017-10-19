@@ -2,7 +2,6 @@ language: ruby
 script: 'bundle exec rake; bundle exec codeclimate-test-reporter'
 cache: bundler
 rvm:
-  - 1.9.3
   - 2.0.0
   - 2.3.0
   - ruby-head
