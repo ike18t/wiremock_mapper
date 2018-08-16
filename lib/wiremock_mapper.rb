@@ -3,7 +3,11 @@ require_relative 'configuration'
 
 module WireMockMapper
   class << self
-    def create_mapping(url = Configuration.wiremock_url)
+    def create_mapping(url = Configuration.wiremock_url, &block)
+      create_mapping_with_priority(nil, url, &block)
+    end
+
+    def create_mapping_with_priority(priority = nil, url = Configuration.wiremock_url)
       request_builder = deep_clone(Configuration.request_builder)
       response_builder = deep_clone(Configuration.response_builder)
       scenario_builder = deep_clone(Configuration.scenario_builder)
@@ -11,6 +15,8 @@ module WireMockMapper
       yield request_builder, response_builder, scenario_builder
 
       body = { request: request_builder, response: response_builder }.merge(scenario_builder)
+      body[:priority] = priority if priority
+
       response = send_to_wiremock(url, body)
 
       JSON.parse(response.body).fetch('id')

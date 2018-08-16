@@ -18,6 +18,12 @@ module WireMockMapper
         yield @request_builder, @response_builder, @scenario_builder
       end
 
+      def reset_global_mappings
+        @request_builder = Builders::RequestBuilder.new
+        @response_builder = Builders::ResponseBuilder.new
+        @scenario_builder = Builders::ScenarioBuilder.new
+      end
+
       # Set the WireMock url
       # @param url [String] the url of the WireMock server
       def set_wiremock_url(url)
