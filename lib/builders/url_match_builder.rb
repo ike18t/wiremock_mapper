@@ -1,3 +1,5 @@
+require_relative 'helpers'
+
 module WireMockMapper
   module Builders
     class UrlMatchBuilder
