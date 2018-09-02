@@ -2,7 +2,7 @@ $LOAD_PATH.unshift(File.expand_path('../lib', __FILE__))
 
 Gem::Specification.new do |spec|
   spec.name             = 'wiremock_mapper'
-  spec.version          = '2.0.0'
+  spec.version          = '2.1.0'
   spec.platform         = Gem::Platform::RUBY
   spec.required_ruby_version = '>= 2.0.0'
   spec.authors          = ['Isaac Datlof']
