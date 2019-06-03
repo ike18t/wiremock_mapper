@@ -47,6 +47,7 @@ module WireMockMapper
     def clear_wiremock_mappings(url)
       uri = URI([url, WIREMOCK_CLEAR_MAPPINGS_PATH].join('/'))
       http = Net::HTTP.new(uri.host, uri.port)
+      http.use_ssl = true if uri.port == 443
       request = Net::HTTP::Post.new(uri.path)
       http.request(request)
     end
@@ -54,6 +55,7 @@ module WireMockMapper
     def delete_from_wiremock(url, mapping_id)
       uri = URI([url, WIREMOCK_MAPPINGS_PATH, mapping_id].join('/'))
       http = Net::HTTP.new(uri.host, uri.port)
+      http.use_ssl = true if uri.port == 443
       request = Net::HTTP::Delete.new(uri.path)
       http.request(request)
     end
@@ -61,6 +63,7 @@ module WireMockMapper
     def send_to_wiremock(url, body)
       uri = URI([url, WIREMOCK_MAPPINGS_PATH].join('/'))
       http = Net::HTTP.new(uri.host, uri.port)
+      http.use_ssl = true if uri.port == 443
       request = Net::HTTP::Post.new(uri.path, 'Content-Type' => 'application/json')
       request.body = body.to_json
       http.request(request)
@@ -69,6 +72,7 @@ module WireMockMapper
     def reset_wiremock_scenarios(url)
       uri = URI([url, WIREMOCK_RESET_SCENARIOS_PATH].join('/'))
       http = Net::HTTP.new(uri.host, uri.port)
+      http.use_ssl = true if uri.port == 443
       request = Net::HTTP::Post.new(uri.path)
       http.request(request)
     end
