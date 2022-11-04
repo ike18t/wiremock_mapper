@@ -24,4 +24,11 @@ describe WireMockMapper::Configuration do
       expect(WireMockMapper::Configuration.wiremock_url).to eq('http://whereever.com')
     end
   end
+
+  describe 'wiremock_headers' do
+    it 'sets the wiremock headers' do
+      WireMockMapper::Configuration.set_wiremock_headers({ 'Authorization' => 'Bearer ABC123' })
+      expect(WireMockMapper::Configuration.wiremock_headers).to eq({ 'Authorization' => 'Bearer ABC123' })
+    end
+  end
 end

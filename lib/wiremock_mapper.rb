@@ -40,6 +40,10 @@ module WireMockMapper
     WIREMOCK_CLEAR_MAPPINGS_PATH = "#{WIREMOCK_MAPPINGS_PATH}/reset".freeze
     WIREMOCK_RESET_SCENARIOS_PATH = '__admin/scenarios/reset'.freeze
 
+    def headers
+      { 'Content-Type' => 'application/json' }.merge(Configuration.wiremock_headers)
+    end
+
     def deep_clone(object)
       Marshal.load(Marshal.dump(object))
     end
@@ -48,7 +52,7 @@ module WireMockMapper
       uri = URI([url, WIREMOCK_CLEAR_MAPPINGS_PATH].join('/'))
       http = Net::HTTP.new(uri.host, uri.port)
       http.use_ssl = true if uri.port == 443
-      request = Net::HTTP::Post.new(uri.path)
+      request = Net::HTTP::Post.new(uri.path, headers)
       http.request(request)
     end
 
@@ -56,7 +60,7 @@ module WireMockMapper
       uri = URI([url, WIREMOCK_MAPPINGS_PATH, mapping_id].join('/'))
       http = Net::HTTP.new(uri.host, uri.port)
       http.use_ssl = true if uri.port == 443
-      request = Net::HTTP::Delete.new(uri.path)
+      request = Net::HTTP::Delete.new(uri.path, headers)
       http.request(request)
     end
 
@@ -64,7 +68,7 @@ module WireMockMapper
       uri = URI([url, WIREMOCK_MAPPINGS_PATH].join('/'))
       http = Net::HTTP.new(uri.host, uri.port)
       http.use_ssl = true if uri.port == 443
-      request = Net::HTTP::Post.new(uri.path, 'Content-Type' => 'application/json')
+      request = Net::HTTP::Post.new(uri.path, headers)
       request.body = body.to_json
       http.request(request)
     end
@@ -73,7 +77,7 @@ module WireMockMapper
       uri = URI([url, WIREMOCK_RESET_SCENARIOS_PATH].join('/'))
       http = Net::HTTP.new(uri.host, uri.port)
       http.use_ssl = true if uri.port == 443
-      request = Net::HTTP::Post.new(uri.path)
+      request = Net::HTTP::Post.new(uri.path, headers)
       http.request(request)
     end
   end
