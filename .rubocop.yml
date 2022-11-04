@@ -17,3 +17,6 @@ Style/Documentation:
 
 Style/FrozenStringLiteralComment:
   Enabled: false
+
+Gemspec/RequiredRubyVersion:
+  Enabled: false
