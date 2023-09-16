@@ -52,7 +52,8 @@ module WireMockMapper
       # @param transformer name [String]
       # @return [ResponseBuilder] response builder for chaining
       def with_transformer(transformer)
-        @options[:transformer] = transformer
+        @options[:transformers] ||= []
+        @options[:transformers] << transformer
         self
       end
 

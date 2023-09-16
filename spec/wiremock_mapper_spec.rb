@@ -15,7 +15,7 @@ describe WireMockMapper do
                                            'bodyPatterns' => [
                                              { 'matches' => 'some request body' }
                                            ] },
-                                response: { 'body' => 'some response body' } }
+                                response: { 'body' => 'some response body', 'transformers' => ['response-template'] } }
 
       stub = stub_request(:post, "#{url}/__admin/mappings").with(body: expected_request_body)
                                                            .to_return(body: { id: 'whatevs' }.to_json)
@@ -27,6 +27,7 @@ describe WireMockMapper do
                .with_body.matching('some request body')
 
         respond.with_body('some response body')
+               .with_transformer('response-template')
       end
 
       expect(stub).to have_been_requested

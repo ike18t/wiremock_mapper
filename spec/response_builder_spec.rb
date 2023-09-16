@@ -60,7 +60,14 @@ describe WireMockMapper::Builders::ResponseBuilder do
     it 'adds the transformer for wiremock to use' do
       builder.with_transformer('optimus prime')
       result = builder.to_hash
-      expect(result[:transformer]).to eq('optimus prime')
+      expect(result[:transformers]).to eq(['optimus prime'])
+    end
+
+    it 'adds multiple transformers for wiremock to use' do
+      builder.with_transformer('optimus prime')
+             .with_transformer('megatron')
+      result = builder.to_hash
+      expect(result[:transformers]).to eq(['optimus prime', 'megatron'])
     end
   end
 end
